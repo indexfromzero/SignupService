@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/go-kit/kit/endpoint"
 	"github.com/microbusinesses/Micro-Businesses-Core/system"
 	"github.com/microbusinesses/SignupService/domain"
 	"github.com/microbusinesses/SignupService/service"
@@ -38,6 +39,10 @@ type deleteUserRequest struct {
 
 type deleteUserResponse struct {
 	Err string `json:"err,omitempty"`
+}
+
+func main() {
+
 }
 
 func makeCreateUserEndpoint(svc service.SignupService) endpoint.Endpoint {
