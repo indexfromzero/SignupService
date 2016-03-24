@@ -23,11 +23,11 @@ type signupResponse struct {
 func makeSignupEndpoint(svc service.SignupService) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
 		req := request.(signupRequest)
-		userId, err := svc.Signup(req.User)
+		err := svc.Signup(req.User)
 		if err != nil {
 			return signupResponse{err.Error()}, nil
 		}
-		return signupResponse{nil}, nil
+		return signupResponse{""}, nil
 	}
 }
 
@@ -49,7 +49,7 @@ func main() {
 func decodeSignupRequest(r *http.Request) (interface{}, error) {
 	var request signupRequest
 	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
-		return nil, Err
+		return nil, err
 	}
 	return request, nil
 }
